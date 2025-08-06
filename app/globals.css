@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --blue-600: #2563EB;
+  --blue-700: #1D4ED8;
+  --blue-800: #1E40AF;
+  --teal-400: #2DD4BF;
+  --teal-500: #14B8A6;
+  --gray-50: #F9FAFB;
+  --gray-800: #1F2937;
+  --font-body: 'Inter', sans-serif;
+  --font-heading: 'Sora', sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--gray-50);
+  color: var(--gray-800);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+}
+.gradient-text {
+  background: linear-gradient(to right, var(--blue-700), var(--blue-600));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.highlight-gradient {
+  background: linear-gradient(to right, var(--blue-600), var(--teal-500));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 600;
+}
+.primary-cta-btn {
+  background-image: linear-gradient(to right, var(--blue-700) 0%, var(--blue-600) 50%, var(--blue-700) 100%);
+  background-size: 200% auto;
+  color: white;
+  font-weight: 600;
+  padding: 0.875rem 1.75rem;
+  border-radius: 0.5rem;
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 14px 0 rgba(29, 78, 216, 0.25);
+}
+.primary-cta-btn:hover {
+  background-position: right center;
+  transform: translateY(-3px);
+  box-shadow: 0 7px 20px 0 rgba(29, 78, 216, 0.3);
+}
+.secondary-cta-btn {
+  background-color: transparent;
+  color: var(--blue-700);
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  border: 2px solid var(--blue-700);
+  transition: all 0.3s ease;
+}
+.secondary-cta-btn:hover {
+  background-color: #EBF8FF;
+  transform: translateY(-2px);
+}
+
+/* --- Modern Design Elements --- */
+.aurora-bg {
+  position: relative;
+  overflow: hidden;
+  background-color: #fdfdff;
+}
+.aurora-bg::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150%;
+  padding-bottom: 150%;
+  border-radius: 50%;
+  background-image: radial-gradient(circle at 20% 20%, #dbeafe 0%, transparent 40%),
+                    radial-gradient(circle at 80% 70%, #ccfbf1 0%, transparent 40%);
+  animation: aurora-spin 20s linear infinite;
+  z-index: 0;
+  filter: blur(60px);
+  opacity: 0.8;
+}
+@keyframes aurora-spin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* REFINED Card Effect */
+.advantage-card {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(229, 231, 235, 0.5);
+  border-radius: 0.75rem;
+  display: flex;
+  flex-direction: column;
+}
+.advantage-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px -10px rgba(37, 99, 235, 0.2);
+  border-color: rgba(37, 99, 235, 0.4);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-headline-word {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
+.hero-headline-word span {
+  display: inline-block;
+  transform: translateY(110%);
+  transition: transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+.hero-headline-word.visible span {
+  transform: translateY(0);
+}
+
+.timeline-step {
+  position: relative;
+  padding-left: 4.5rem;
+  padding-bottom: 3rem;
+}
+.timeline-step:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 1.5rem;
+  top: 3rem;
+  bottom: -1rem;
+  width: 3px;
+  background: linear-gradient(to bottom, #dbeafe, #ccfbf1);
+}
+.timeline-icon-wrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3.25rem;
+  height: 3.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background-color: #fff;
+  border: 1px solid var(--gray-200);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+.timeline-step:hover .timeline-icon-wrapper {
+  transform: scale(1.1);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+}
+.timeline-icon-wrapper svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--blue-700);
+  transition: all 0.3s ease;
+}
+.timeline-step:hover .timeline-icon-wrapper svg {
+  color: var(--teal-500);
+}

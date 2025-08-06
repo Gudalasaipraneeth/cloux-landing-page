@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloux - Automate Credentialing. Accelerate Revenue.</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --blue-600: #2563EB;
+            --blue-700: #1D4ED8;
+            --blue-800: #1E40AF;
+            --teal-400: #2DD4BF;
+            --teal-500: #14B8A6;
+            --gray-50: #F9FAFB;
+            --gray-800: #1F2937;
+            --font-body: 'Inter', sans-serif;
+            --font-heading: 'Sora', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--gray-50);
+            color: var(--gray-800);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+        }
+        .gradient-text {
+            background: linear-gradient(to right, var(--blue-700), var(--blue-600));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .highlight-gradient {
+            background: linear-gradient(to right, var(--blue-600), var(--teal-500));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
+        }
+        .primary-cta-btn {
+            background-image: linear-gradient(to right, var(--blue-700) 0%, var(--blue-600) 50%, var(--blue-700) 100%);
+            background-size: 200% auto;
+            color: white;
+            font-weight: 600;
+            padding: 0.875rem 1.75rem;
+            border-radius: 0.5rem;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 14px 0 rgba(29, 78, 216, 0.25);
+        }
+        .primary-cta-btn:hover {
+            background-position: right center;
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px 0 rgba(29, 78, 216, 0.3);
+        }
+        .secondary-cta-btn {
+            background-color: transparent;
+            color: var(--blue-700);
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            border: 2px solid var(--blue-700);
+            transition: all 0.3s ease;
+        }
+        .secondary-cta-btn:hover {
+            background-color: #EBF8FF;
+            transform: translateY(-2px);
+        }
+        
+        /* --- Modern Design Elements --- */
+        .aurora-bg {
+            position: relative;
+            overflow: hidden;
+            background-color: #fdfdff;
+        }
+        .aurora-bg::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150%;
+            padding-bottom: 150%;
+            border-radius: 50%;
+            background-image: radial-gradient(circle at 20% 20%, #dbeafe 0%, transparent 40%),
+                              radial-gradient(circle at 80% 70%, #ccfbf1 0%, transparent 40%);
+            animation: aurora-spin 20s linear infinite;
+            z-index: 0;
+            filter: blur(60px);
+            opacity: 0.8;
+        }
+        @keyframes aurora-spin {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* REFINED Card Effect */
+        .advantage-card {
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(229, 231, 235, 0.5);
+            border-radius: 0.75rem;
+            display: flex; /* Added for alignment */
+            flex-direction: column; /* Added for alignment */
+        }
+        .advantage-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(37, 99, 235, 0.2);
+            border-color: rgba(37, 99, 235, 0.4);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-headline-word {
+            display: inline-block;
+            overflow: hidden;
+            vertical-align: top;
+        }
+        .hero-headline-word span {
+            display: inline-block;
+            transform: translateY(110%);
+            transition: transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+        }
+        .hero-headline-word.visible span {
+            transform: translateY(0);
+        }
+
+        .timeline-step {
+            position: relative;
+            padding-left: 4.5rem;
+            padding-bottom: 3rem;
+        }
+        .timeline-step:not(:last-child)::before {
+            content: '';
+            position: absolute;
+            left: 1.5rem;
+            top: 3rem;
+            bottom: -1rem;
+            width: 3px;
+            background: linear-gradient(to bottom, #dbeafe, #ccfbf1);
+        }
+        .timeline-icon-wrapper {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 3.25rem;
+            height: 3.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9999px;
+            background-color: #fff;
+            border: 1px solid var(--gray-200);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        .timeline-step:hover .timeline-icon-wrapper {
+            transform: scale(1.1);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
+        .timeline-icon-wrapper svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            color: var(--blue-700);
+            transition: all 0.3s ease;
+        }
+        .timeline-step:hover .timeline-icon-wrapper svg {
+            color: var(--teal-500);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header -->
+    <header class="bg-white/60 backdrop-blur-xl shadow-sm sticky top-0 z-50 border-b border-gray-200/80">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold gradient-text" style="font-family: var(--font-heading);">Cloux</div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#how-it-works" class="font-medium text-gray-600 hover:text-blue-700 transition-colors">How It Works</a>
+                <a href="#ai-advantage" class="font-medium text-gray-600 hover:text-blue-700 transition-colors">Our AI Advantage</a>
+                <a href="#pricing" class="font-medium text-gray-600 hover:text-blue-700 transition-colors">Pricing</a>
+            </div>
+            <a href="#book-demo" class="primary-cta-btn text-sm">Book a Demo</a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="aurora-bg pt-20 pb-24 md:pt-28 md:pb-32">
+            <div class="container mx-auto px-6 text-center relative z-10">
+                <h1 id="hero-headline" class="text-4xl md:text-5xl lg:text-6xl font-bold">
+                    <div class="hero-headline-word"><span><span class="gradient-text">Automate</span> Credentialing.</span></div>
+                    <div class="mt-2 hero-headline-word"><span><span class="gradient-text">Accelerate</span> Revenue.</span></div>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto mt-6 reveal" style="transition-delay: 0.3s;">
+                    Cloux is the <span class="highlight-gradient">AI native</span> platform for small dental practices that turns credentialing into a fast, automated workflow, helping get providers billable faster.
+                </p>
+                <div class="mt-10 flex justify-center items-center space-x-4 reveal" style="transition-delay: 0.4s;">
+                    <a href="#book-demo" class="primary-cta-btn text-lg">Book a Demo</a>
+                    <a href="#how-it-works" class="secondary-cta-btn text-lg">See The Workflow</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- "How It Works" Section -->
+        <section id="how-it-works" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto reveal">
+                    <h2 class="text-3xl md:text-4xl font-bold">Your Credentialing Command Center</h2>
+                    <p class="text-gray-600 mt-4 text-lg">Cloux transforms credentialing from a scattered, manual process into a centralized, <span class="highlight-gradient">intelligent system</span>.</p>
+                </div>
+                <!-- Redesigned Timeline -->
+                <div class="mt-20 max-w-3xl mx-auto">
+                    <div class="timeline-step reveal">
+                        <div class="timeline-icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">Reduce Administrative Work</h3>
+                        <p class="mt-2 text-gray-600">Our <span class="highlight-gradient">AI ingestion system</span> securely processes provider documents via drag-and-drop. Providers can also use the Provider Self-Service Compliance Portal to upload their documents and manage their compliance status, reducing administrative workload and speeding up the process.</p>
+                    </div>
+                    <div class="timeline-step reveal">
+                        <div class="timeline-icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286zm0 13.036h.008v.008h-.008v-.008z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">Ensure Accuracy</h3>
+                        <p class="mt-2 text-gray-600"><span class="highlight-gradient">Automated verification</span> cross-checks key fields against primary sources like state license boards, NPI registries, and CAQH, and flags ambiguities for review.</p>
+                    </div>
+                    <div class="timeline-step reveal">
+                        <div class="timeline-icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">Accelerate Revenue</h3>
+                        <p class="mt-2 text-gray-600"><span class="highlight-gradient">Intelligent automation</span> uses verified data to auto-populate payer application packets, reducing turnaround time from months to as little as a week in pilot settings.</p>
+                    </div>
+                    <div class="timeline-step reveal">
+                        <div class="timeline-icon-wrapper">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0h18M-4.5 12h22.5" /></svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">Stay Compliant</h3>
+                        <p class="mt-2 text-gray-600"><span class="highlight-gradient">Continuous monitoring</span> tracks expiration dates and compliance events, automatically triggering follow-ups and providing one-click, audit-ready reports so you're always prepared.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive App Demo Section -->
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto reveal">
+                    <h2 class="text-3xl md:text-4xl font-bold">Experience the Workflow</h2>
+                    <p class="text-gray-600 mt-4 text-lg">Click on the provider in the interactive demo below to see how our AI-powered system automates your workflow.</p>
+                </div>
+                <div class="mt-12 max-w-6xl mx-auto rounded-xl shadow-2xl border border-gray-200 bg-white p-2 reveal">
+                    <div class="bg-gray-100 rounded-t-lg h-8 flex items-center px-4">
+                        <div class="flex space-x-2">
+                            <div class="w-3 h-3 rounded-full bg-red-400"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-400"></div>
+                        </div>
+                    </div>
+                    <div id="cloux-demo-container" class="bg-gray-50 font-sans rounded-b-lg">
+                        <!-- This container will be populated by the interactive demo script -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- "Our AI Advantage" Section -->
+        <section id="ai-advantage" class="py-24 aurora-bg">
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="text-center max-w-3xl mx-auto reveal">
+                    <h2 class="text-3xl md:text-4xl font-bold">Our AI-Native Advantage</h2>
+                    <p class="text-gray-600 mt-4 text-lg">Our platform is designed for automation from the ground up, resulting in a faster and more accurate workflow.</p>
+                </div>
+                <div class="mt-16 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="p-8 rounded-lg advantage-card reveal">
+                        <h4 class="font-bold text-gray-800 text-lg">Specialized Automation Modules</h4>
+                        <p class="text-gray-600 mt-2 text-sm">We use a set of specialized automation modules, each designed for a specific task—from document ingestion and data extraction to cross-verification and payer form population.</p>
+                    </div>
+                    <div class="p-8 rounded-lg advantage-card reveal" style="transition-delay: 0.1s;">
+                        <h4 class="font-bold text-gray-800 text-lg">Built From the Ground Up</h4>
+                        <p class="text-gray-600 mt-2 text-sm">Our entire system was designed around automation. This deep integration allows for a seamless, efficient workflow that is difficult for legacy systems to replicate.</p>
+                    </div>
+                    <div class="p-8 rounded-lg advantage-card reveal" style="transition-delay: 0.2s;">
+                        <h4 class="font-bold text-gray-800 text-lg">Data Integrity at the Core</h4>
+                        <p class="text-gray-600 mt-2 text-sm">Verification is built into every step, so credentialing data stays accurate and compliant throughout the process.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto reveal">
+                     <h2 class="text-3xl font-bold">What Dental Practices Are Saying</h2>
+                     <p class="text-gray-600 mt-4 text-lg">Feedback from our early interviews with over 20 practice leaders.</p>
+                </div>
+                <div class="mt-12 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+                     <div class="testimonial-card reveal">
+                         <p class="text-gray-700 italic relative z-10">"We use a spreadsheet and it's a mess. Knowing where every provider stands on one simple dashboard would be a game-changer."</p>
+                         <p class="mt-4 font-semibold text-blue-800">- Michael T., Clinic Owner</p>
+                     </div>
+                     <div class="testimonial-card reveal" style="transition-delay: 0.1s;">
+                         <p class="text-gray-700 italic relative z-10">"This process is a constant headache. A tool that automates follow-ups would save me at least 10 hours a month."</p>
+                         <p class="mt-4 font-semibold text-blue-800">- Brenda E., Office Manager</p>
+                     </div>
+                     <div class="testimonial-card reveal" style="transition-delay: 0.2s;">
+                         <p class="text-gray-700 italic relative z-10">"Getting a new dentist approved by payers is the single biggest bottleneck to our revenue. This can't come soon enough."</p>
+                         <p class="mt-4 font-semibold text-blue-800">- Sarah P., Practice Administrator</p>
+                     </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Pricing Section -->
+        <section id="pricing" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6 text-center reveal">
+                <h2 class="text-3xl md:text-4xl font-bold">Simple, Transparent Pricing</h2>
+                <p class="mt-4 text-lg text-gray-600">Plans that grow with you. No hidden fees, no enterprise contracts.</p>
+                <div class="mt-8">
+                    <a href="#book-demo" class="primary-cta-btn text-lg">Book a Demo for Pricing Details</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA Section -->
+        <section id="book-demo" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="bg-blue-800 text-white p-8 md:p-12 rounded-xl shadow-2xl text-center overflow-hidden relative">
+                    <div class="absolute -top-10 -left-10 w-40 h-40 bg-white/10 rounded-full"></div>
+                    <div class="absolute -bottom-16 -right-5 w-48 h-48 bg-white/10 rounded-full"></div>
+                    <div class="relative z-10 reveal">
+                        <h2 class="text-3xl md:text-4xl font-bold">Ready to See Cloux in Action?</h2>
+                        <p class="mt-4 text-lg max-w-3xl mx-auto text-blue-100">Stop losing revenue to credentialing delays. Schedule a demo to see how our AI-native platform can help get your providers billable faster.</p>
+                        <div class="mt-8 max-w-lg mx-auto">
+                            <form id="demo-form" class="space-y-4">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <input type="text" placeholder="First Name" class="w-full px-4 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300 text-lg" required>
+                                    <input type="text" placeholder="Last Name" class="w-full px-4 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300 text-lg" required>
+                                </div>
+                                <input type="email" placeholder="Work Email" class="w-full px-4 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300 text-lg" required>
+                                <input type="text" placeholder="Practice Name" class="w-full px-4 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300 text-lg" required>
+                                <button type="submit" class="w-full bg-white text-blue-800 font-bold px-8 py-3 rounded-lg hover:bg-gray-100 transition duration-300 text-lg !mt-6">Book My Demo</button>
+                            </form>
+                            <div id="form-response" class="mt-4 h-6"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-500">
+            <p class="font-semibold text-gray-600 text-xl" style="font-family: var(--font-heading);">Cloux</p>
+            <p class="text-sm mt-2 max-w-2xl mx-auto font-medium text-gray-600">Our mission is to build the back-office engine for the 154,000 U.S. small-practice healthcare providers, eliminating the friction of credentialing so they can focus on patient care.</p>
+            <p class="text-xs mt-4">&copy; 2025 Cloux. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        
+        // --- ANIMATION SCRIPTS ---
+
+        // 1. On-scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => {
+            observer.observe(el);
+        });
+
+        // 2. Hero headline text animation
+        const headline = document.getElementById('hero-headline');
+        headline.innerHTML = ''; // Clear existing content
+        const line1 = document.createElement('div');
+        line1.className = 'hero-headline-word';
+        line1.innerHTML = `<span><span class="gradient-text">Automate</span> Credentialing.</span>`;
+        const line2 = document.createElement('div');
+        line2.className = 'mt-2 hero-headline-word';
+        line2.innerHTML = `<span><span class="gradient-text">Accelerate</span> Revenue.</span>`;
+        headline.appendChild(line1);
+        headline.appendChild(line2);
+        setTimeout(() => {
+            document.querySelectorAll('.hero-headline-word').forEach((div, index) => {
+                setTimeout(() => div.classList.add('visible'), index * 100);
+            });
+        }, 100);
+        
+        // --- INTERACTIVE DEMO SCRIPT ---
+        const demoContainer = document.getElementById('cloux-demo-container');
+        if (demoContainer) {
+            const providersData = {
+                jane_smith: { name: "Dr. Jane Smith", status: "Next: Upload 1 remaining document", statusColor: "text-blue-600", progress: 86, stats: { done: 6, active: 0, todo: 1 }, cardClass: "bg-white hover:bg-gray-50 border border-gray-200", docs: [{ label: "State Dental License", status: "verified" }, { label: "DEA Certificate", status: "verified" }, { label: "Malpractice Insurance", status: "verified" }, { label: "Curriculum Vitae", status: "verified" }, { label: "Board Certification", status: "needed" }, { label: "NPI Confirmation Letter", status: "verified" }, { label: "W-9 Form", status: "verified" },], activeDoc: "Board Certification" }
+            };
+            const getDashboardHTML = () => `<div class="p-4 sm:p-6 lg:p-8"><div class="mb-6"><h1 class="font-bold text-2xl text-gray-800">Credentialing Dashboard</h1><p class="text-base text-gray-500">Monitor all provider credentialing progress at a glance.</p></div><div class="space-y-4">${Object.keys(providersData).map(key => { const p = providersData[key]; return `<div class="${p.cardClass} p-4 lg:p-6 rounded-lg shadow-sm cursor-pointer transition-all" data-provider="${key}"><div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4"><div class="flex-1 min-w-0"><h2 class="font-bold text-lg text-gray-800 truncate">${p.name}</h2><p class="text-sm font-medium ${p.statusColor} mt-1">${p.status}</p></div><div class="w-full lg:w-64"><div class="flex w-full h-3 rounded-full overflow-hidden bg-gray-200"><div class="bg-green-500" style="width: ${p.progress}%;"></div></div><div class="flex justify-between text-xs mt-2 text-gray-500"><span>${p.stats.done} Done</span><span>${p.stats.active} Active</span><span>${p.stats.todo} Todo</span></div></div></div></div>` }).join('')}</div></div>`;
+            const getProviderProfileHTML = (providerId) => { const provider = providersData[providerId]; return `<div class="p-4 sm:p-6 lg:p-8"><div class="mb-6"><button id="back-to-dashboard" class="text-sm font-medium text-blue-600 hover:underline flex items-center mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-1"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>Back to Dashboard</button><h1 class="font-bold text-2xl text-gray-800">${provider.name}</h1></div><div class="grid grid-cols-1 xl:grid-cols-12 gap-6 lg:gap-8"><div class="xl:col-span-4"><div class="bg-white p-4 rounded-lg border border-gray-200 h-fit"><h2 class="font-bold text-lg mb-4 text-gray-800">Document Checklist</h2><div id="doc-checklist" class="space-y-1 max-h-72 overflow-y-auto pr-2">${getChecklistHTML(provider)}</div></div></div><div id="workspace" class="xl:col-span-8">${getWorkspaceHTML(provider)}</div></div></div>` };
+            const getChecklistHTML = (provider) => provider.docs.map(doc => `<div class="flex items-center p-3 rounded-md transition-colors ${doc.label === provider.activeDoc ? 'bg-blue-50' : 'hover:bg-gray-50'}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 mr-3 ${doc.status === 'verified' ? 'text-green-500' : 'text-gray-400'}">${doc.status === 'verified' ? '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>' : '<circle cx="12" cy="12" r="10"/>'}</svg><p class="text-sm font-medium text-gray-700">${doc.label}</p></div>`).join('');
+            const getWorkspaceHTML = (provider) => `<h2 class="font-bold text-xl text-gray-800 mb-4">${provider.activeDoc}</h2><div id="dropzone" class="border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-all hover:bg-blue-50 hover:border-blue-400 border-gray-300"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 mx-auto mb-4 text-gray-400"><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7"/><line x1="16" x2="22" y1="5" y2="5"/><line x1="19" x2="19" y1="2" y2="8"/><path d="M18 21v-7a4 4 0 0 0-4-4H6"/></svg><p class="text-gray-500">Drag & Drop PDF or JPG here, or click to upload.</p><p class="text-xs text-gray-400 mt-1">This is a demo. Clicking will simulate AI verification.</p></div>`;
+            const getAIWorkingHTML = () => `<div class="bg-white rounded-lg border border-gray-200 p-8 text-center flex flex-col items-center justify-center h-full"><div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div><p id="ai-status-text" class="mt-4 font-semibold text-gray-700">AI Analyzing Document...</p><p class="text-sm text-gray-500">This process is automated in the real product.</p></div>`;
+            const getAIFinishedHTML = () => `<div class="bg-white rounded-lg border-2 border-green-500 p-8 text-center flex flex-col items-center justify-center h-full"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 mx-auto mb-4 text-green-500"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><p class="font-bold text-lg text-gray-800">Document Verified!</p><p class="text-gray-600">All documents are now verified and the provider is ready for enrollment.</p></div>`;
+            const showDashboard = () => { demoContainer.innerHTML = getDashboardHTML(); document.querySelectorAll('[data-provider]').forEach(card => card.addEventListener('click', (e) => showProviderProfile(e.currentTarget.dataset.provider))) };
+            const showProviderProfile = (providerId) => { demoContainer.innerHTML = getProviderProfileHTML(providerId); document.getElementById('back-to-dashboard').addEventListener('click', showDashboard); const dropzone = document.getElementById('dropzone'); if (dropzone) { dropzone.addEventListener('click', () => { const workspace = document.getElementById('workspace'); workspace.innerHTML = getAIWorkingHTML(); const aiStatusText = document.getElementById('ai-status-text'); const statuses = ["Cross-Referencing Sources...", "Populating Provider Profile...", "Success!"]; let statusIndex = 0; const interval = setInterval(() => { if (statusIndex < statuses.length) { aiStatusText.textContent = statuses[statusIndex]; statusIndex++ } else { clearInterval(interval); const provider = providersData[providerId]; const docToUpdate = provider.docs.find(d => d.label === provider.activeDoc); if (docToUpdate) { docToUpdate.status = 'verified' } provider.activeDoc = ""; document.getElementById('doc-checklist').innerHTML = getChecklistHTML(provider); workspace.innerHTML = getAIFinishedHTML() } }, 1500) }) } };
+            showDashboard();
+        }
+
+        // Demo Form Logic
+        const demoForm = document.getElementById('demo-form');
+        if(demoForm) {
+            demoForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                if (demoForm.checkValidity()) {
+                    const formContainer = demoForm.parentElement;
+                    formContainer.innerHTML = `<p class="text-lg text-white">Thank you! We've received your request and will be in touch shortly to schedule your demo.</p>`;
+                }
+            });
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetElement = document.querySelector(this.getAttribute('href'));
+                if(targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    });
+    </script>
+</body>
+</html>
